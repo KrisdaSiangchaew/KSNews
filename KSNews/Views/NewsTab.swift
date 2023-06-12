@@ -8,7 +8,18 @@
 import SwiftUI
 
 struct NewsTab: View {
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    
     @StateObject var vm = ArticleNewsViewModel()
+    
+    var showToolbar: Bool {
+        switch horizontalSizeClass {
+        case .compact:
+            return true
+        default:
+            return false
+        }
+    }
     
     var body: some View {
         NavigationStack {
@@ -26,9 +37,11 @@ struct NewsTab: View {
                     }
                 }
                 .toolbar {
-                    ToolbarItemGroup(placement: .automatic) {
-                        countryMenu
-                        categoryMenu
+                    if showToolbar {
+                        ToolbarItemGroup(placement: .automatic) {
+                            countryMenu
+                            categoryMenu
+                        }
                     }
                 }
                 .navigationTitle(vm.selectedCategory.text.capitalized)
