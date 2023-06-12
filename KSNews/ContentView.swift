@@ -8,20 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     var body: some View {
-        TabView {
-            NewsTab()
-                .tabItem {
-                    Label("News", systemImage: "newspaper")
-                }
-            SearchTab()
-                .tabItem {
-                    Label("Search", systemImage: "magnifyingglass")
-                }
-            BookmarkTab()
-                .tabItem {
-                    Label("Saved", systemImage: "bookmark")
-                }
+        switch horizontalSizeClass {
+        case .regular:
+            RegularContainer()
+        default:
+            CompactContainer()
         }
     }
 }
@@ -30,6 +23,6 @@ struct ContentView_Previews: PreviewProvider {
     @StateObject static var vm = ArticleBookmarkViewModel.shared
     static var previews: some View {
         ContentView()
-            .environmentObject(vm)
+            .environmentObject(ArticleBookmarkViewModel.shared)
     }
 }
