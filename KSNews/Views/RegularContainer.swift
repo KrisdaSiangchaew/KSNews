@@ -12,6 +12,21 @@ struct RegularContainer: View {
     var body: some View {
         NavigationSplitView {
             Sidebar()
+                .navigationDestination(for: Tab.self) { tab in
+                    switch tab {
+                    case .search: SearchTab()
+                    case .bookmark: BookmarkTab()
+                    default: NewsTab()
+                    }
+                }
+                .navigationDestination(for: Category.self) {
+                    // do query
+                    Text($0.text)
+                }
+                .navigationDestination(for: Country.self) {
+                    // do query
+                    Text($0.text)
+                }
         } detail: {
             NewsTab()
         }

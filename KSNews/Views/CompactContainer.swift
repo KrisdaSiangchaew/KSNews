@@ -8,26 +8,24 @@
 import SwiftUI
 
 struct CompactContainer: View {
-    enum TabTag {
-        case news, search, bookmark
-    }
-    @State private var selectedTab: TabTag = .news
+    @State private var selectedTab: Tab = .news
+    
     var body: some View {
         TabView(selection: $selectedTab) {
             NewsTab()
-                .tag(TabTag.news)
+                .tag(Tab.news)
                 .tabItem {
-                    Label("News", systemImage: "newspaper")
+                    NewsLabel()
                 }
             SearchTab()
-                .tag(TabTag.search)
+                .tag(Tab.search)
                 .tabItem {
-                    Label("Search", systemImage: "magnifyingglass")
+                    SearchLabel()
                 }
             BookmarkTab()
-                .tag(TabTag.bookmark)
+                .tag(Tab.bookmark)
                 .tabItem {
-                    Label("Saved", systemImage: "bookmark")
+                    SavedLabel()
                 }
         }
     }

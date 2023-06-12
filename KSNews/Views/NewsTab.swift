@@ -76,7 +76,11 @@ struct NewsTab: View {
     
     private var categoryMenu: some View {
         Menu {
-            CategoryList(model: vm)
+            Picker("Menu", selection: $vm.selectedCategory) {
+                ForEach(Category.allCases) { category in
+                    CategoryLabel(category: category).tag(category)
+                }
+            }
         } label: {
             Image(systemName: "line.3.horizontal")
         }
@@ -84,7 +88,11 @@ struct NewsTab: View {
     
     private var countryMenu: some View {
         Menu {
-            CountryList(model: vm)
+            Picker("Country", selection: $vm.selectedCountry) {
+                ForEach(Country.allCases) { country in
+                    CountryLabel(country: country)
+                }
+            }
         } label: {
             Text(vm.selectedCountry.flag)
         }
