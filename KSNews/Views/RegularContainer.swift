@@ -12,9 +12,6 @@ struct RegularContainer: View {
     var body: some View {
         NavigationSplitView {
             Sidebar()
-                .navigationDestination(for: Category.self) { category in
-                    Text(category.text)
-                }
         } detail: {
             NewsTab()
         }

@@ -26,3 +26,24 @@ extension Category {
         if self == .general { return "Top Headlines"} else { return self.rawValue }
     }
 }
+
+extension Category {
+    var systemImage: String {
+        switch self {
+        case .general:
+            return "newspaper"
+        case .business:
+            return "dollarsign"
+        case .technology:
+            return "cpu"
+        case .entertainment:
+            return "popcorn"
+        case .sports:
+            return "sportscourt"
+        case .science:
+            return "testtube.2"
+        case .health:
+            return "cross.case"
+        }
+    }
+}

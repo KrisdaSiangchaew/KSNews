@@ -29,12 +29,12 @@ extension Country {
     }
     var text: String {
         switch self {
-        case .jp: return "🇯🇵 Japan"
-        case .de: return "🇩🇪 Germany"
-        case .us: return "🇺🇸 United States"
-        case .th: return "🇹🇭 Thailand"
-        case .sg: return "🇸🇬 Singapore"
-        case .ph: return "🇵🇭 Philippines"
+        case .jp: return "Japan"
+        case .de: return "Germany"
+        case .us: return "United States"
+        case .th: return "Thailand"
+        case .sg: return "Singapore"
+        case .ph: return "Philippines"
         }
     }
 }
