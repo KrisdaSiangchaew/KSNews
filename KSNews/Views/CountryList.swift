@@ -20,9 +20,7 @@ struct CountryList: View {
 }
 
 struct CountryList_Previews: PreviewProvider {
-    @StateObject static var vm = ArticleNewsViewModel()
-    
     static var previews: some View {
-        CountryList(model: vm)
+        CountryList(model: ArticleNewsViewModel.shared)
     }
 }

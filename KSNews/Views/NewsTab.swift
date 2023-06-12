@@ -10,7 +10,7 @@ import SwiftUI
 struct NewsTab: View {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     
-    @StateObject var vm = ArticleNewsViewModel()
+    @StateObject var vm = ArticleNewsViewModel.shared
     
     var showToolbar: Bool {
         switch horizontalSizeClass {
@@ -93,7 +93,7 @@ struct NewsTab: View {
 
 struct NewsTab_Previews: PreviewProvider {
     static var previews: some View {
-        NewsTab(vm: ArticleNewsViewModel(articles: Article.previewData))
+        NewsTab(vm: ArticleNewsViewModel.shared)
             .environmentObject(ArticleBookmarkViewModel.shared)
     }
 }
