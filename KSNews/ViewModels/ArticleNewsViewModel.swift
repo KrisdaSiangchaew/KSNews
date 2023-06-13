@@ -15,6 +15,7 @@ class ArticleNewsViewModel: ObservableObject {
     
     let country: Country
     let newsAPI = NewsAPI.shared
+    
     init(articles: [Article]? = nil, selectedCategory: Category = .general, country: Country = .us) {
         if let articles = articles {
             self.phase = .success(articles)

@@ -11,18 +11,16 @@ struct SearchTab: View {
     @StateObject var searchVM = ArticleSearchViewModel.shared
     
     var body: some View {
-        NavigationStack {
-            ArticleList(articles: articles)
-                .overlay(overlayView)
-                .navigationTitle("Search")
-        }
-        .searchable(text: $searchVM.searchQuery)
-        .onSubmit(of: .search, search)
-        .onChange(of: searchVM.searchQuery) { newValue in
-            if newValue.isEmpty {
-                searchVM.phase = .empty
+        ArticleList(articles: articles)
+            .overlay(overlayView)
+            .navigationTitle("Search")
+            .searchable(text: $searchVM.searchQuery)
+            .onSubmit(of: .search, search)
+            .onChange(of: searchVM.searchQuery) { newValue in
+                if newValue.isEmpty {
+                    searchVM.phase = .empty
+                }
             }
-        }
     }
     
     private var articles: [Article] {

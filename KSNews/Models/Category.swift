@@ -23,6 +23,33 @@ extension Category: Identifiable {
 
 extension Category {
     var text: String {
-        if self == .general { return "Top Headlines"} else { return self.rawValue }
+        if self == .general { return "Top Headlines"} else { return self.rawValue.capitalized }
+    }
+}
+
+extension Category {
+    var systemImage: String {
+        switch self {
+        case .general:
+            return "newspaper"
+        case .business:
+            return "building.2"
+        case .technology:
+            return "desktopcomputer"
+        case .entertainment:
+            return "tv"
+        case .sports:
+            return "sportscourt"
+        case .science:
+            return "wave.3.right"
+        case .health:
+            return "cross"
+        }
+    }
+}
+
+extension Category {
+    static var menuItems: [MenuItem] {
+        Category.allCases.map { MenuItem.category($0) }
     }
 }
