@@ -8,24 +8,22 @@
 import SwiftUI
 
 struct RegularContainer: View {
-    @State private var categorySelection: Category = .general
+    @ObservedObject var articleNewsModel = ArticleNewsViewModel.shared
+    
     var body: some View {
         NavigationSplitView {
             Sidebar()
                 .navigationDestination(for: Tab.self) { tab in
                     switch tab {
-                    case .search: SearchTab()
                     case .bookmark: BookmarkTab()
-                    default: NewsTab()
+                    default: SearchTab()
                     }
                 }
-                .navigationDestination(for: Category.self) {
-                    // do query
-                    Text($0.text)
+                .navigationDestination(for: Category.self) { _ in
+                    NewsTab()
                 }
-                .navigationDestination(for: Country.self) {
-                    // do query
-                    Text($0.text)
+                .navigationDestination(for: Country.self) { _ in
+                    NewsTab()
                 }
         } detail: {
             NewsTab()

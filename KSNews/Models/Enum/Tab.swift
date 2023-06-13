@@ -8,9 +8,9 @@
 import Foundation
 
 enum Tab: String, CaseIterable {
+    case bookmark
     case news
     case search
-    case bookmark
 }
 
 extension Tab: Identifiable {

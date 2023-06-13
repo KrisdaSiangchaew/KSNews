@@ -7,7 +7,7 @@
 
 import Foundation
 
-// https://newsapi.org/v2/top-headlines?country=de&category=business&apiKey=078f31481d034f20a8180d0e20d8f0ee
+// https://newsapi.org/v2/top-headlines?country=de&category=business&apiKey=
 
 struct NewsAPI {
     static let shared = NewsAPI()

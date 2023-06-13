@@ -44,6 +44,7 @@
 		2C988EB52A36ED00002FD739 /* CompactContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C988EB42A36ED00002FD739 /* CompactContainer.swift */; };
 		2C988EB72A36EE81002FD739 /* RegularContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C988EB62A36EE81002FD739 /* RegularContainer.swift */; };
 		2C988EB92A36F795002FD739 /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C988EB82A36F795002FD739 /* Sidebar.swift */; };
+		2CC175E12A38451E00E1DC30 /* Sidebar-Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC175E02A38451E00E1DC30 /* Sidebar-Button.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +87,7 @@
 		2C988EB42A36ED00002FD739 /* CompactContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompactContainer.swift; sourceTree = "<group>"; };
 		2C988EB62A36EE81002FD739 /* RegularContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularContainer.swift; sourceTree = "<group>"; };
 		2C988EB82A36F795002FD739 /* Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
+		2CC175E02A38451E00E1DC30 /* Sidebar-Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sidebar-Button.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +203,7 @@
 				2C988EB42A36ED00002FD739 /* CompactContainer.swift */,
 				2C988EB62A36EE81002FD739 /* RegularContainer.swift */,
 				2C988EB82A36F795002FD739 /* Sidebar.swift */,
+				2CC175E02A38451E00E1DC30 /* Sidebar-Button.swift */,
 				0134C4192A376FF6005CE6E8 /* Shared */,
 			);
 			path = Views;
@@ -323,6 +326,7 @@
 				017EB6AD2A3787AF0078875B /* CountryLabel.swift in Sources */,
 				011D58862A34584B006D9510 /* SearchHistoryList.swift in Sources */,
 				2C988EB92A36F795002FD739 /* Sidebar.swift in Sources */,
+				2CC175E12A38451E00E1DC30 /* Sidebar-Button.swift in Sources */,
 				01BD59B22A2E4A720041A2DB /* ArticleBookmarkViewModel.swift in Sources */,
 				0134C41D2A377028005CE6E8 /* SearchLabel.swift in Sources */,
 				0193DCC12A2BBBE000D1DD52 /* ArticleList.swift in Sources */,

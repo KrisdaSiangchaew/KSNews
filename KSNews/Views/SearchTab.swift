@@ -15,8 +15,8 @@ struct SearchTab: View {
             ArticleList(articles: articles)
                 .overlay(overlayView)
                 .navigationTitle("Search")
+                .searchable(text: $searchVM.searchQuery)
         }
-        .searchable(text: $searchVM.searchQuery)
         .onSubmit(of: .search, search)
         .onChange(of: searchVM.searchQuery) { newValue in
             if newValue.isEmpty {

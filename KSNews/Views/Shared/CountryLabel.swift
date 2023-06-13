@@ -11,7 +11,8 @@ struct CountryLabel: View {
     let country: Country
     
     var body: some View {
-        Text("\(country.flag) \(country.text)").tag(country)    }
+        Text("\(country.text) \(country.flag)").tag(country)
+    }
 }
 
 struct CountryLabel_Previews: PreviewProvider {
