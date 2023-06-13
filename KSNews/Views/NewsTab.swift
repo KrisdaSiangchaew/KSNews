@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct NewsTab: View {
-    @StateObject var vm = ArticleNewsViewModel()
+    @StateObject var vm: ArticleNewsViewModel
+    
+    init(articles: [Article]? = nil, cateogry: Category = .general, country: Country = .us) {
+        self._vm = StateObject(wrappedValue: ArticleNewsViewModel(articles: articles, selectedCategory: cateogry, country: country))
+    }
     
     var body: some View {
         ArticleList(articles: articles)
@@ -82,7 +86,7 @@ struct NewsTab: View {
 
 struct NewsTab_Previews: PreviewProvider {
     static var previews: some View {
-        NewsTab(vm: ArticleNewsViewModel(articles: Article.previewData))
+        NewsTab(articles: Article.previewData)
             .environmentObject(ArticleBookmarkViewModel.shared)
     }
 }

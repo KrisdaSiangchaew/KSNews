@@ -55,9 +55,9 @@ struct SidebarContentView: View {
         case .saved:
             BookmarkTab()
         case .category(let category):
-            NewsTab()
+            NewsTab(cateogry: category)
         case .country(let country):
-            NewsTab()
+            NewsTab(country: country)
         }
     }
 }
