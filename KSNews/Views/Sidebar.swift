@@ -12,22 +12,18 @@ struct Sidebar: View {
     
     var body: some View {
         List {
-            NavigationLink(value: Tab.search) {
-                SearchLabel()
-            }
-            NavigationLink(value: Tab.bookmark) {
-                SavedLabel()
-            }
+            linkToSearch
+            linkToSaved
             .listRowSeparator(.hidden)
             
             Section {
-                sidebarCategoryLinks
+                linkToCategory
             } header: {
                 Text("Category")
             }
             
             Section {
-                sidebarCountryLinks
+                linkToCountry
             } header: {
                 Text("Country")
             }

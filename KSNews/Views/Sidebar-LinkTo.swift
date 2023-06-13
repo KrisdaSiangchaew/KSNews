@@ -8,7 +8,19 @@
 import SwiftUI
 
 extension Sidebar {
-    var sidebarCategoryLinks: some View {
+    var linkToSearch: some View {
+        NavigationLink(value: Tab.search) {
+            SearchLabel()
+        }
+    }
+    
+    var linkToSaved: some View {
+        NavigationLink(value: Tab.bookmark) {
+            SavedLabel()
+        }
+    }
+    
+    var linkToCategory: some View {
         ForEach(Category.allCases) { category in
             Button {
                 model.selectedCategory = category
@@ -20,7 +32,7 @@ extension Sidebar {
         }
     }
     
-    var sidebarCountryLinks: some View {
+    var linkToCountry: some View {
         ForEach(Country.allCases) { country in
             Button {
                 model.selectedCountry = country

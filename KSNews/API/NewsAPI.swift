@@ -20,10 +20,10 @@ struct NewsAPI {
     let keyDecodingStrategy: JSONDecoder.KeyDecodingStrategy = .useDefaultKeys
     
     private func fetchArticles(from urlString: String) async throws -> [Article] {
-        #warning("remove below directive")
-        #if targetEnvironment(simulator)
-        return Article.previewData
-        #endif
+//        #warning("remove below directive")
+//        #if targetEnvironment(simulator)
+//        return Article.previewData
+//        #endif
         let newsAPIResponse: NewsAPIResponse = try await URLSession.shared.decode(dateDecodingStrategy: dateDecodingStrategy, from: urlString)
         return newsAPIResponse.articles ?? []
     }
