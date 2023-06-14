@@ -77,6 +77,7 @@ struct ArticleRow: View {
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fill)
+                        .frame(maxWidth: .infinity, maxHeight: 180)
                 case .failure(_):
                     HStack {
                         Spacer()
@@ -91,6 +92,9 @@ struct ArticleRow: View {
             .asyncImageFrame(horizontalSizeClass: horizontalSizeClass ?? .compact)
             .background(Color.gray.opacity(0.2))
             .clipped()
+            .onTapGesture {
+                showSheet = true
+            }
             
         // Title and Description
             VStack(alignment: .leading, spacing: 8) {
@@ -116,7 +120,7 @@ struct ArticleRow: View {
                     .font(.caption)
                     .foregroundColor(.secondary)
                     .lineLimit(1)
-                    .allowsHitTesting(false)
+                    .onTapGesture { }
                 
                 Spacer()
                 
@@ -126,6 +130,7 @@ struct ArticleRow: View {
             }
             .padding([.horizontal, .bottom])
         }
+        .fixedSize(horizontal: false, vertical: true)
         .sheet(isPresented: $showSheet) {
             SafariView(url: article.articleURL)
         }

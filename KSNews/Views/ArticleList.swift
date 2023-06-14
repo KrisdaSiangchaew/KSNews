@@ -33,7 +33,7 @@ struct ArticleList: View {
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 300), spacing: 8)]) {
                 ForEach(articles) { article in
                     ArticleRow(article: article)
-                        .frame(height: 360)
+                        .frame(height: 390)
                         .background(Color(uiColor: .systemBackground))
                         .mask(RoundedRectangle(cornerRadius: 8))
                         .shadow(radius: 4)
