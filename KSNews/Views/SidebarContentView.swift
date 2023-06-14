@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct SidebarContentView: View {
+    @State private var selectedItem: MenuItem.ID?
+    
     var body: some View {
         NavigationSplitView {
-            List {
+            List(selection: $selectedItem) {
                 ForEach([MenuItem.saved, MenuItem.search]) {
                     navigationLinkForMenuItem($0)
                 }
