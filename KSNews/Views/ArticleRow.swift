@@ -45,85 +45,102 @@ struct ShareButton: View {
     }
 }
 
-struct ArticleFooter: View {
-    let article: Article
-    
-    var body: some View {
-        HStack {
-            Text(article.captionText)
-                .font(.caption)
-                .foregroundColor(.secondary)
-                .lineLimit(1)
-                .allowsHitTesting(false)
-            
-            Spacer()
-            
-            BookmarkButton(article: article)
-
-            ShareButton(article: article)
-        }
-    }
-}
-
-struct ArticleText: View {
-    let article: Article
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(article.titleText)
-                .font(.headline)
-                .lineLimit(3)
-            Text(article.descriptionText)
-                .font(.subheadline)
-                .lineLimit(2)
-        }
-    }
-}
-
-struct ArticleHero: View {
-    let article: Article
-    
-    var body: some View {
-        AsyncImage(url: article.imageURL) { image in
-            image
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-        } placeholder: {
-            HStack {
-                Spacer()
-                Image(systemName: "photo")
-                    .imageScale(.large)
-                    .frame(minHeight: 200)
-                Spacer()
-            }
-        }
-        .frame(maxWidth: .infinity, maxHeight: 300)
-        .background(Color.gray.opacity(0.2))
-        .clipped()
-    }
-}
-
 struct ArticleRow: View {
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    
     let article: Article
     
     @State private var showSheet = false
     
     var body: some View {
-        VStack(alignment: .center) {
-            VStack(alignment: .center, spacing: 16) {
-                ArticleHero(article: article)
-                ArticleText(article: article)
-                    .padding([.horizontal])
+        switch horizontalSizeClass {
+        case .regular:
+            GeometryReader { contentView(proxy: $0) }
+        default:
+            contentView()
+        }
+    }
+    
+    @ViewBuilder
+    private func contentView(proxy: GeometryProxy? = nil) -> some View {
+        // Hero image
+        VStack(alignment: .center, spacing: 16) {
+            AsyncImage(url: article.imageURL) { phase in
+                switch phase {
+                case .empty:
+                    HStack {
+                        Spacer()
+                        ProgressView()
+                        Spacer()
+                    }
+                case .success(let image):
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                case .failure(_):
+                    HStack {
+                        Spacer()
+                        Image(systemName: "photo")
+                            .imageScale(.large)
+                        Spacer()
+                    }
+                @unknown default:
+                    fatalError()
+                }
             }
+            .asyncImageFrame(horizontalSizeClass: horizontalSizeClass ?? .compact)
+            .background(Color.gray.opacity(0.2))
+            .clipped()
+            
+        // Title and Description
+            VStack(alignment: .leading, spacing: 8) {
+                Text(article.titleText)
+                    .font(.headline)
+                    .lineLimit(3)
+                Text(article.descriptionText)
+                    .font(.subheadline)
+                    .lineLimit(2)
+            }
+            .padding([.horizontal])
             .onTapGesture {
                 showSheet = true
             }
-            ArticleFooter(article: article)
-                .padding([.horizontal, .bottom])
+            
+            if horizontalSizeClass == .regular {
+                Spacer()
+            }
+            
+        // Footnote and buttons
+            HStack {
+                Text(article.captionText)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                    .lineLimit(1)
+                    .allowsHitTesting(false)
+                
+                Spacer()
+                
+                BookmarkButton(article: article)
+                
+                ShareButton(article: article)
+            }
+            .padding([.horizontal, .bottom])
         }
-        
         .sheet(isPresented: $showSheet) {
             SafariView(url: article.articleURL)
+        }
+    }
+}
+
+
+fileprivate extension View {
+    @ViewBuilder
+    func asyncImageFrame(horizontalSizeClass: UserInterfaceSizeClass) -> some View {
+        switch horizontalSizeClass {
+        case .regular:
+            frame(minHeight: 180)
+        default:
+            frame(minHeight: 200, maxHeight: 300)
         }
     }
 }

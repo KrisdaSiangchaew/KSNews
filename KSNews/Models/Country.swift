@@ -17,16 +17,8 @@ enum Country: String, CaseIterable {
 }
 
 extension Country {
-    var flag: String {
-        switch self {
-        case .jp: return "🇯🇵"
-        case .de: return "🇩🇪"
-        case .us: return "🇺🇸"
-        case .th: return "🇹🇭"
-        case .sg: return "🇸🇬"
-        case .ph: return "🇵🇭"
-        }
-    }
+    var flag: String { "flag" }
+    
     var text: String {
         switch self {
         case .jp: return "🇯🇵 Japan"
@@ -41,4 +33,10 @@ extension Country {
 
 extension Country: Identifiable {
     var id: Self { self }
+}
+
+extension Country {
+    static var menuItems: [MenuItem] {
+        allCases.map { .country($0) }
+    }
 }

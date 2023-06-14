@@ -8,20 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    
     var body: some View {
-        TabView {
-            NewsTab()
-                .tabItem {
-                    Label("News", systemImage: "newspaper")
-                }
-            SearchTab()
-                .tabItem {
-                    Label("Search", systemImage: "magnifyingglass")
-                }
-            BookmarkTab()
-                .tabItem {
-                    Label("Saved", systemImage: "bookmark")
-                }
+        switch horizontalSizeClass {
+        case .regular:
+            SidebarContentView()
+        default:
+            TabContentView()
         }
     }
 }

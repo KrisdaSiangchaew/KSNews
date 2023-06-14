@@ -8,31 +8,29 @@
 import SwiftUI
 
 struct NewsTab: View {
-    @StateObject var vm = ArticleNewsViewModel()
+    @StateObject var vm: ArticleNewsViewModel
+    
+    init(articles: [Article]? = nil, cateogry: Category = .general, country: Country = .us) {
+        self._vm = StateObject(wrappedValue: ArticleNewsViewModel(articles: articles, selectedCategory: cateogry, country: country))
+    }
     
     var body: some View {
-        NavigationStack {
-            ArticleList(articles: articles)
-                .overlay(overlayView)
-                .task(id: vm.selectedCountry) {
+        ArticleList(articles: articles)
+            .overlay(overlayView)
+            .task(id: vm.selectedCountry) { await loadTask() }
+            .task(id: vm.selectedCategory) { await loadTask() }
+            .refreshable {
+                Task {
                     await loadTask()
                 }
-                .task(id: vm.selectedCategory) {
-                    await loadTask()
+            }
+            .toolbar {
+                ToolbarItemGroup(placement: .automatic) {
+                    countryMenu
+                    categoryMenu
                 }
-                .refreshable {
-                    Task {
-                        await loadTask()
-                    }
-                }
-                .toolbar {
-                    ToolbarItemGroup(placement: .automatic) {
-                        countryMenu
-                        categoryMenu
-                    }
-                }
-                .navigationTitle(vm.selectedCategory.text.capitalized)
-        }
+            }
+            .navigationTitle(vm.selectedCategory.text.capitalized)
     }
     
     @ViewBuilder
@@ -65,7 +63,7 @@ struct NewsTab: View {
         Menu {
             Picker("Menu", selection: $vm.selectedCategory) {
                 ForEach(Category.allCases) {
-                    Text($0.text.capitalized).tag($0)
+                    Text($0.text).tag($0)
                 }
             }
         } label: {
@@ -81,14 +79,14 @@ struct NewsTab: View {
                 }
             }
         } label: {
-            Text(vm.selectedCountry.flag)
+            Image(systemName: vm.selectedCountry.flag)
         }
     }
 }
 
 struct NewsTab_Previews: PreviewProvider {
     static var previews: some View {
-        NewsTab(vm: ArticleNewsViewModel(articles: Article.previewData))
+        NewsTab(articles: Article.previewData)
             .environmentObject(ArticleBookmarkViewModel.shared)
     }
 }
