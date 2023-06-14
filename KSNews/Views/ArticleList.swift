@@ -29,7 +29,20 @@ struct ArticleList: View {
     }
     
     private var gridView: some View {
-        Text("Grid view")
+        ScrollView {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 300), spacing: 8)]) {
+                ForEach(articles) { article in
+                    ArticleRow(article: article)
+                        .frame(height: 360)
+                        .background(Color(uiColor: .systemBackground))
+                        .mask(RoundedRectangle(cornerRadius: 8))
+                        .shadow(radius: 4)
+                        .padding(.bottom, 4)
+                }
+            }
+            .padding()
+        }
+        .background(Color(uiColor: .secondarySystemGroupedBackground))
     }
     
     @ViewBuilder
